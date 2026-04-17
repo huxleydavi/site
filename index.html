@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#254e39">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" type="image/png" href="img/icon.jpg"/>
+<link rel="stylesheet" href="css/index.css">
+
+<script src="js/index.js" defer></script>
+
+<title>Aristóteles Botinas</title>
+
+</head>
+
+<body>
+
+<div id="transition"></div>
+
+<!-- LOADING -->
+<div id="loading">
+    <div class="logo">
+        <span style="color:var(--verde)">ARISTÓTELES</span>
+        <span style="color:var(--vermelho)">BOTINAS</span>
+    </div>
+    <div class="loader"><span></span></div>
+</div>
+
+<div class="bg" id="bg"></div>
+
+<section class="hero" id="hero">
+    <h1>Feita pra durar.</h1>
+    <p>Pra quem trabalha de verdade.</p>
+
+    <button class="btn" onclick="entrar()">
+        ACESSAR CATÁLOGO
+    </button>
+    
+    <!-- NOVO BOTÃO -->
+    <button class="btn-vendedor" onclick="entrarVendedores()">
+        ÁREA PARA VENDEDORES
+    </button>
+</section>
+
+<div class="tag">SIMPLES • FORTE • CONFIÁVEL</div>
+
+<script>
+
+    // ================= IMAGENS DO FUNDO =================
+    const fundos = [
+        "img/bg/1.jpg",
+        "img/bg/2.jpg",
+        "img/bg/3.jpg",
+        "img/bg/4.jpg",
+        "img/bg/5.jpg",
+    ];
+    
+    let indexFundo = 0;
+    const bg = document.getElementById("bg");
+    
+    // ================= TROCA SUAVE =================
+    function trocarFundo(){
+    
+        // fade out
+        bg.style.opacity = "0";
+    
+        setTimeout(()=>{
+    
+            indexFundo = (indexFundo + 1) % fundos.length;
+    
+            bg.style.backgroundImage = `url('${fundos[indexFundo]}')`;
+    
+            // zoom reset
+            bg.style.transform = "scale(1.2)";
+    
+            setTimeout(()=>{
+                // fade in + zoom suave
+                bg.style.opacity = "0.08";
+                bg.style.transform = "scale(1)";
+            },100);
+    
+        },600);
+    }
+    
+    // ================= INICIAR ROTACAO =================
+    function iniciarFundo(){
+        bg.style.backgroundImage = `url('${fundos[0]}')`;
+        bg.style.opacity = "0.08";
+        bg.style.transform = "scale(1)";
+    
+        setInterval(trocarFundo, 2000); // troca a cada 4s
+    }
+    iniciarFundo();
+    
+</script>
+<script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("js/service-worker.js")
+        .then(reg => {
+    
+          // 🔥 força atualização automática
+          reg.onupdatefound = () => {
+            const newWorker = reg.installing;
+    
+            newWorker.onstatechange = () => {
+              if (newWorker.state === "installed") {
+                if (navigator.serviceWorker.controller) {
+                  console.log("🔥 NOVA VERSÃO DISPONÍVEL");
+                  window.location.reload(); // recarrega automático
+                }
+              }
+            };
+          };
+    
+        });
+    }
+</script>
+
+</body>
+</html>

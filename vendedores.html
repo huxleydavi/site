@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área Vendedores - Aristóteles Botinas</title>
+  <link rel="stylesheet" href="css/vendedor-shared.css">
+  <style>
+    :root{
+      --verde:#254e39;
+      --verde-escuro:#1d3d2d;
+      --vermelho:#b22222;
+      --fundo:#f5f5f5;
+      --card:#ffffff;
+      --texto:#1f1f1f;
+      --sub:#6b7280;
+      --borda:#e8e8e8;
+      --sombra:0 8px 24px rgba(0,0,0,0.08);
+      --radius:16px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--fundo);
+      color:var(--texto);
+      min-height:100vh;
+    }
+
+
+
+    main{
+      padding:16px;
+      padding-bottom:90px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    .hero{
+      background:linear-gradient(135deg,var(--verde),var(--verde-escuro));
+      color:#fff;
+      border-radius:20px;
+      padding:20px;
+      box-shadow:var(--sombra);
+      margin-bottom:16px;
+    }
+
+    .hero h1{
+      font-size:22px;
+      margin-bottom:6px;
+    }
+
+    .hero p{
+      font-size:14px;
+      opacity:.9;
+      margin-bottom:16px;
+    }
+
+    .hero-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .btn-main,
+    .btn-sec{
+      border:none;
+      border-radius:14px;
+      padding:14px 16px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      width:100%;
+    }
+
+    .btn-main{
+      background:#fff;
+      color:var(--verde);
+    }
+
+    .btn-sec{
+      background:rgba(255,255,255,0.14);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.18);
+    }
+
+    .section{
+      margin-bottom:18px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+
+    .section-title h2{
+      font-size:16px;
+      color:var(--verde);
+    }
+
+    .section-link{
+      font-size:13px;
+      color:var(--verde);
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--sombra);
+      border:1px solid var(--borda);
+    }
+
+    .card-label{
+      font-size:12px;
+      color:var(--sub);
+      margin-bottom:6px;
+    }
+
+    .card-value{
+      font-size:22px;
+      font-weight:800;
+      color:var(--verde);
+    }
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .quick-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--sombra);
+      border:1px solid var(--borda);
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .quick-card .icon{
+      font-size:22px;
+      margin-bottom:10px;
+    }
+
+    .quick-card h3{
+      font-size:15px;
+      margin-bottom:6px;
+      color:var(--verde);
+    }
+
+    .quick-card p{
+      font-size:13px;
+      color:var(--sub);
+      line-height:1.4;
+    }
+
+    .route-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .route-item{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow:var(--sombra);
+      border:1px solid var(--borda);
+    }
+
+    .route-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .route-top h3{
+      font-size:15px;
+      color:var(--texto);
+      margin-bottom:4px;
+    }
+
+    .route-top p{
+      font-size:13px;
+      color:var(--sub);
+    }
+
+    .chip{
+      background:#eef6f1;
+      color:var(--verde);
+      font-size:12px;
+      font-weight:700;
+      padding:6px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    .route-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .route-actions button{
+      border:none;
+      border-radius:12px;
+      padding:12px;
+      font-size:13px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .btn-outline{
+      background:#f7f7f7;
+      color:var(--verde);
+      border:1px solid #e5e5e5;
+    }
+
+    .btn-solid{
+      background:var(--verde);
+      color:#fff;
+    }
+
+    .alert-box{
+      background:#fff4f4;
+      border:1px solid #ffd8d8;
+      color:var(--vermelho);
+      border-radius:14px;
+      padding:14px;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    nav.bottom-nav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      background:#fff;
+      border-top:1px solid rgba(0,0,0,0.06);
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+      z-index:60;
+    }
+
+    .nav-item{
+      text-decoration:none;
+      color:var(--sub);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      font-size:11px;
+      font-weight:700;
+      padding:6px 4px;
+    }
+
+    .nav-item.active{
+      color:var(--verde);
+    }
+
+    .nav-item .nav-icon{
+      font-size:18px;
+    }
+
+    @media (min-width:768px){
+      .hero{
+        padding:24px;
+      }
+
+      .hero h1{
+        font-size:28px;
+      }
+
+      .hero-actions{
+        grid-template-columns:220px 220px;
+      }
+
+      .dashboard-grid{
+        display:grid;
+        grid-template-columns:1.1fr .9fr;
+        gap:16px;
+      }
+
+      .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="top-header">
+    <h2>Área do Vendedor</h2>
+
+    <div class="nav-header">
+        <button onclick="location.href='vendedores.html'">🏠 Painel</button>
+        <button onclick="location.href='clientes.html'" class="ativo">👥 Clientes</button>
+        <button onclick="location.href='novo-pedido.html'">🛒 Pedido</button>
+        <button onclick="location.href='historico-pedidos.html'">📄 Histórico</button>
+        <button onclick="location.href='rota.html'">📍 Rota</button>
+    </div>
+</header>
+
+  <main>
+    <section class="hero">
+      <h1>Área de Vendedores</h1>
+      <p>Organize visitas, cadastre clientes, feche pedidos e faça backup completo sem backend.</p>
+
+      <div class="hero-actions">
+        <a href="novo-pedido.html"><button class="btn-main">+ Novo Pedido</button></a>
+        <a href="novo-cliente.html"><button class="btn-sec">+ Novo Cliente</button></a>
+      </div>
+      <div class="hero-actions" style="margin-top:10px;">
+        <button class="btn-main" id="exportarJsonBtn">Exportar Backup JSON</button>
+        <button class="btn-sec" id="importarJsonBtn">Importar Backup JSON</button>
+      </div>
+      <div class="hero-actions" style="margin-top:10px;grid-template-columns:1fr;">
+        <button class="btn-sec" id="exportarCsvBtn">Exportar CSV (clientes e pedidos)</button>
+      </div>
+      <input type="file" id="importBackupInput" accept=".json" hidden>
+    </section>
+
+    <div class="dashboard-grid">
+      <section class="section">
+        <div class="section-title">
+          <h2>Resumo do dia</h2>
+        </div>
+
+        <div class="stats-grid">
+          <div class="card"><div class="card-label">Vendas do dia</div><div class="card-value" data-stat="vendas">R$ 0,00</div></div>
+          <div class="card"><div class="card-label">Pedidos</div><div class="card-value" data-stat="pedidos">0</div></div>
+          <div class="card"><div class="card-label">Clientes na rota</div><div class="card-value" data-stat="clientes">0</div></div>
+          <div class="card"><div class="card-label">Comissão estimada</div><div class="card-value" data-stat="comissao">R$ 0,00</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title"><h2>Atalhos rápidos</h2></div>
+        <div class="quick-grid">
+          <a href="clientes.html" class="quick-card"><div class="icon">👥</div><h3>Clientes</h3><p>Buscar, cadastrar e abrir ficha do cliente.</p></a>
+          <a href="novo-pedido.html" class="quick-card"><div class="icon">🛒</div><h3>Pedidos</h3><p>Montar pedido novo com rapidez.</p></a>
+          <a href="rota.html" class="quick-card"><div class="icon">🗺️</div><h3>Rota</h3><p>Ver ordem das visitas do dia.</p></a>
+          <a href="historico-pedidos.html" class="quick-card"><div class="icon">📄</div><h3>Histórico</h3><p>Consultar pedidos anteriores.</p></a>
+        </div>
+      </section>
+    </div>
+
+    <section class="section">
+      <div class="section-title"><h2>Rota de hoje</h2><a href="rota.html" class="section-link">Ver tudo</a></div>
+      <div class="route-list" id="rotaHojeLista"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>Avisos</h2></div>
+      <div class="alert-box" id="avisoPainel"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item active"><span class="nav-icon">🏠</span><span>Painel</span></a>
+    <a href="clientes.html" class="nav-item"><span class="nav-icon">👥</span><span>Clientes</span></a>
+    <a href="novo-pedido.html" class="nav-item"><span class="nav-icon">🛒</span><span>Pedido</span></a>
+    <a href="historico-pedidos.html" class="nav-item"><span class="nav-icon">📄</span><span>Histórico</span></a>
+    <a href="rota.html" class="nav-item"><span class="nav-icon">🗺️</span><span>Rota</span></a>
+  </nav>
+  <script src="js/vendedor-db.js"></script>
+
+</body>
+</html>
